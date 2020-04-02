@@ -7,8 +7,31 @@ function hexToRgb(hex) {
   } : null;
 }
 
-let color = process.argv[3]
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
 
-let rgb = hexToRgb(color);
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 
-console.log(`rgb( ${rgb.r}, ${rgb.g}, ${rgb.b} )`)
+let type = process.argv[2];
+let output;
+
+switch(type){
+    case "hex":
+        let color = process.argv[3];
+        let rgb = hexToRgb(color);
+        output = `rgb( ${rgb.r}, ${rgb.g}, ${rgb.b} )`;
+        break;
+    case "rgb":
+        output = rgbToHex(parseInt(process.argv[3]), parseInt(process.argv[4]), parseInt(process.argv[5]))
+        break;
+    default:
+        output = "error"
+}
+
+
+
+console.log(output)
